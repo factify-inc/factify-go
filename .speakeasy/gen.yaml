@@ -1,0 +1,64 @@
+configVersion: 2.0.0
+generation:
+  sdkClassName: Factify
+  maintainOpenAPIOrder: true
+  usageSnippets:
+    optionalPropertyRendering: withExample
+    sdkInitStyle: constructor
+  useClassNamesForArrayFields: true
+  fixes:
+    nameResolutionDec2023: true
+    nameResolutionFeb2025: true
+    parameterOrderingFeb2024: true
+    requestResponseComponentNamesFeb2024: true
+    securityFeb2025: true
+    sharedErrorComponentsApr2025: true
+  auth:
+    oAuth2ClientCredentialsEnabled: true
+    oAuth2PasswordEnabled: true
+    hoistGlobalSecurity: true
+  inferSSEOverload: true
+  sdkHooksConfigAccess: true
+  schemas:
+    allOfMergeStrategy: deepMerge
+  requestBodyFieldName: body
+  persistentEdits:
+    enabled: "false"
+  tests:
+    generateTests: false
+    generateNewTests: true
+    skipResponseBodyAssertions: false
+go:
+  version: 0.3.2
+  additionalDependencies: {}
+  author: Factify
+  baseErrorName: FactifyError
+  clientServerStatusCodesAsErrors: true
+  compileCommand: "GOWORK=off go build ./..."
+  defaultErrorName: APIError
+  description: Go SDK for the Factify API
+  flattenGlobalSecurity: true
+  forwardCompatibleEnumsByDefault: true
+  imports:
+    option: openapi
+    paths:
+      callbacks: models/callbacks
+      errors: models/sdkerrors
+      operations: models/operations
+      shared: models/components
+      webhooks: models/webhooks
+  includeEmptyObjects: true
+  inferUnionDiscriminators: true
+  inputModelSuffix: input
+  maxMethodParams: 4
+  methodArguments: require-security-and-request
+  modulePath: ""
+  multipartArrayFormat: standard
+  nullableOptionalWrapper: true
+  outputModelSuffix: output
+  packageName: github.com/factify-inc/factify-go
+  respectRequiredFields: false
+  responseFormat: envelope-http
+  sdkPackageName: ""
+  templateVersion: v2
+  unionStrategy: populated-fields
