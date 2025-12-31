@@ -2,8 +2,8 @@ workflowVersion: 1.0.0
 speakeasyVersion: latest
 sources:
     factify-api:
-        registry:
-            location: registry.speakeasyapi.dev/factify/api/factify-api
+        inputs:
+            - location: ./openapi.json
 targets:
     go:
         target: go
@@ -11,6 +11,4 @@ targets:
         output: .
         codeSamples:
             output: codeSamples.yaml
-            registry:
-                location: registry.speakeasyapi.dev/factify/api/factify-api-go-code-samples
             style: standard
