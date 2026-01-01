@@ -578,28 +578,28 @@
       },
       "ListDocumentPoliciesRequest": {
         "additionalProperties": false,
-        "description": "ListDocumentPoliciesRequest specifies pagination for listing document policies.",
+        "description": "ListDocumentPoliciesRequest specifies pagination for listing document policies.\n Follows Google AIP-158 for pagination field naming.",
         "properties": {
-          "cursor": {
-            "description": "Opaque pagination cursor from previous response.",
-            "title": "cursor",
-            "type": "string"
-          },
           "document_id": {
             "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
             "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "document_id",
             "type": "string"
           },
-          "limit": {
-            "description": "Number of results to return (1-100). Default: 50.",
-            "example": 50,
+          "page_size": {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
             "format": "int32",
             "maximum": 100,
             "minimum": 1,
             "nullable": true,
-            "title": "limit",
+            "title": "page_size",
             "type": "integer"
+          },
+          "page_token": {
+            "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+            "example": "eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0",
+            "title": "page_token",
+            "type": "string"
           }
         },
         "title": "ListDocumentPoliciesRequest",
@@ -628,7 +628,7 @@
       },
       "ListDocumentsRequest": {
         "additionalProperties": false,
-        "description": "ListDocumentsRequest specifies filters and pagination for listing documents.\n Note: Keeping filters flat (not nested) for cleaner REST API query parameters.\n Nested message would result in ?filters.created_after=... which is verbose.\n To implement nested filters with flat REST params would require both:\n 1. OpenAPI post-processing (cosmetic for docs)\n 2. Custom middleware/transcoding (runtime behavior)\ncreated_time_range // created_after must be before created_before\n",
+        "description": "ListDocumentsRequest specifies filters and pagination for listing documents.\n Follows Google AIP-158 for pagination field naming.\n Note: Keeping filters flat (not nested) for cleaner REST API query parameters.\n Nested message would result in ?filters.created_after=... which is verbose.\n To implement nested filters with flat REST params would require both:\n 1. OpenAPI post-processing (cosmetic for docs)\n 2. Custom middleware/transcoding (runtime behavior)\ncreated_time_range // created_after must be before created_before\n",
         "properties": {
           "created_after": {
             "description": "Filter: return documents created after this timestamp.",
@@ -644,21 +644,20 @@
             "title": "created_before",
             "type": "string"
           },
-          "cursor": {
-            "description": "Opaque pagination cursor from previous response.\n Format: Base64-encoded string from the pagination.next_cursor field.",
-            "example": "eyJsYXN0X2lkIjoiZG9jXzAxaDJ4Y2VqcXRmMm5icmV4eDN2cWpocDQxIn0",
-            "title": "cursor",
-            "type": "string"
-          },
-          "limit": {
-            "description": "Number of results to return (1-100). Default: 50.",
-            "example": 50,
+          "page_size": {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
             "format": "int32",
             "maximum": 100,
             "minimum": 1,
             "nullable": true,
-            "title": "limit",
+            "title": "page_size",
             "type": "integer"
+          },
+          "page_token": {
+            "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+            "example": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
+            "title": "page_token",
+            "type": "string"
           }
         },
         "title": "ListDocumentsRequest",
@@ -687,28 +686,28 @@
       },
       "ListVersionsRequest": {
         "additionalProperties": false,
-        "description": "ListVersionsRequest specifies filters and pagination for listing versions.",
+        "description": "ListVersionsRequest specifies filters and pagination for listing versions.\n Follows Google AIP-158 for pagination field naming.",
         "properties": {
-          "cursor": {
-            "description": "Opaque pagination cursor from previous response.",
-            "title": "cursor",
-            "type": "string"
-          },
           "document_id": {
             "description": "Document ID to list versions for.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
             "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "document_id",
             "type": "string"
           },
-          "limit": {
-            "description": "Number of results to return (1-100). Default: 50.",
-            "example": 50,
+          "page_size": {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
             "format": "int32",
             "maximum": 100,
             "minimum": 1,
             "nullable": true,
-            "title": "limit",
+            "title": "page_size",
             "type": "integer"
+          },
+          "page_token": {
+            "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+            "example": "eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0",
+            "title": "page_token",
+            "type": "string"
           }
         },
         "title": "ListVersionsRequest",
@@ -737,17 +736,23 @@
       },
       "Pagination": {
         "additionalProperties": false,
-        "description": "Pagination contains cursor-based pagination metadata.",
+        "description": "Pagination contains cursor-based pagination metadata.\n Follows Google AIP-158 for pagination field naming.",
         "properties": {
           "has_more": {
-            "description": "Whether there are more results available.",
+            "description": "Whether there are more results in the forward direction.",
             "title": "has_more",
             "type": "boolean"
           },
-          "next_cursor": {
-            "description": "Cursor for fetching the next page, empty if no more results.",
-            "example": "eyJsYXN0X2lkIjoiZG9jXzAxaDJ4Y2VqcXRmMm5icmV4eDN2cWpocDQxIn0",
-            "title": "next_cursor",
+          "next_page_token": {
+            "description": "Token to retrieve the next page of results.\n Empty if there are no more results in the forward direction.",
+            "example": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
+            "title": "next_page_token",
+            "type": "string"
+          },
+          "prev_page_token": {
+            "description": "Token to retrieve the previous page of results.\n Empty if this is the first page.",
+            "example": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0",
+            "title": "prev_page_token",
             "type": "string"
           }
         },
@@ -1024,28 +1029,27 @@
         "operationId": "listDocuments",
         "parameters": [
           {
-            "description": "Number of results to return (1-100). Default: 50.",
+            "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
             "in": "query",
-            "name": "limit",
+            "name": "page_token",
             "schema": {
-              "description": "Number of results to return (1-100). Default: 50.",
-              "example": 50,
-              "format": "int32",
-              "maximum": 100,
-              "minimum": 1,
-              "title": "limit",
-              "type": "integer"
+              "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+              "example": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
+              "title": "page_token",
+              "type": "string"
             }
           },
           {
-            "description": "Opaque pagination cursor from previous response.\n Format: Base64-encoded string from the pagination.next_cursor field.",
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
             "in": "query",
-            "name": "cursor",
+            "name": "page_size",
             "schema": {
-              "description": "Opaque pagination cursor from previous response.\n Format: Base64-encoded string from the pagination.next_cursor field.",
-              "example": "eyJsYXN0X2lkIjoiZG9jXzAxaDJ4Y2VqcXRmMm5icmV4eDN2cWpocDQxIn0",
-              "title": "cursor",
-              "type": "string"
+              "description": "Maximum number of items to return per page (1-100). Default: 50.",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "page_size",
+              "type": "integer"
             }
           },
           {
@@ -1092,20 +1096,42 @@
         "tags": [
           "Documents"
         ],
+        "x-speakeasy-name-override": "list",
         "x-speakeasy-pagination": {
+          "type": "cursor",
           "inputs": [
             {
+              "name": "page_token",
               "in": "parameters",
-              "name": "cursor",
               "type": "cursor"
             }
           ],
           "outputs": {
-            "nextCursor": "$.pagination.next_cursor"
-          },
-          "type": "cursor"
+            "nextCursor": "$.pagination.next_page_token"
+          }
         },
-        "x-speakeasy-name-override": "list"
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "listDocuments",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.list({\n    pageToken: \"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "listDocuments",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.documents.list(page_token=\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+          },
+          {
+            "lang": "go",
+            "label": "listDocuments",
+            "source": "package main\n\nimport(\n\t\"context\"\n\tfactifygo \"github.com/factify-inc/factify-go\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := factifygo.New(\n        factifygo.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Documents.List(ctx, factifygo.Pointer(\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\"), nil, nil)\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.ListDocumentsResponse != nil {\n        for {\n            // handle items\n\n            res, err = res.Next()\n\n            if err != nil {\n                // handle error\n            }\n\n            if res == nil {\n                break\n            }\n        }\n    }\n}"
+          },
+          {
+            "lang": "java",
+            "label": "listDocuments",
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.operations.ListDocumentsRequest;\nimport org.openapis.openapi.models.operations.ListDocumentsResponse;\nimport org.openapis.openapi.models.sdkerrors.Error;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        ListDocumentsRequest req = ListDocumentsRequest.builder()\n                .pageToken(\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\")\n                .build();\n\n\n        sdk.documents().list()\n                .callAsStream()\n                .forEach((ListDocumentsResponse item) -\u003e {\n                   // handle page\n                });\n\n    }\n}"
+          }
+        ]
       },
       "post": {
         "description": "Creates a new document by uploading a PDF file.",
@@ -1154,7 +1180,29 @@
         "tags": [
           "Documents"
         ],
-        "x-speakeasy-name-override": "create"
+        "x-speakeasy-name-override": "create",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "createDocument",
+            "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.create({\n    payload: await openAsBlob(\"example.file\"),\n    title: \"\u003cvalue\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "createDocument",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.documents.create(payload={\n        \"file_name\": \"example.file\",\n        \"content\": open(\"example.file\", \"rb\"),\n    }, title=\"\u003cvalue\u003e\")\n\n    assert res.create_document_response is not None\n\n    # Handle response\n    print(res.create_document_response)"
+          },
+          {
+            "lang": "go",
+            "label": "createDocument",
+            "source": "package main\n\nimport(\n\t\"context\"\n\tfactifygo \"github.com/factify-inc/factify-go\"\n\t\"os\"\n\t\"github.com/factify-inc/factify-go/models/components\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := factifygo.New(\n        factifygo.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    example, fileErr := os.Open(\"example.file\")\n    if fileErr != nil {\n        panic(fileErr)\n    }\n\n    res, err := s.Documents.Create(ctx, components.CreateDocumentRequest{\n        Payload: components.CreateDocumentRequestPayload{\n            FileName: \"example.file\",\n            Content: example,\n        },\n        Title: \"\u003cvalue\u003e\",\n    })\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.CreateDocumentResponse != nil {\n        // handle response\n    }\n}"
+          },
+          {
+            "lang": "java",
+            "label": "createDocument",
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport java.nio.file.Paths;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.components.CreateDocumentRequest;\nimport org.openapis.openapi.models.components.CreateDocumentRequestPayload;\nimport org.openapis.openapi.models.operations.CreateDocumentResponse;\nimport org.openapis.openapi.models.sdkerrors.Error;\nimport org.openapis.openapi.utils.Blob;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        CreateDocumentRequest req = CreateDocumentRequest.builder()\n                .payload(CreateDocumentRequestPayload.builder()\n                    .fileName(\"example.file\")\n                    .content(Blob.from(Paths.get(\"example.file\")))\n                    .build())\n                .title(\"\u003cvalue\u003e\")\n                .build();\n\n        CreateDocumentResponse res = sdk.documents().create()\n                .request(req)\n                .call();\n\n    }\n}"
+          }
+        ]
       }
     },
     "/v1beta/documents/{document_id}": {
@@ -1209,7 +1257,29 @@
         "tags": [
           "Documents"
         ],
-        "x-speakeasy-name-override": "get"
+        "x-speakeasy-name-override": "get",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "getDocument",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.get({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "getDocument",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.documents.get(document_id=\"\u003cid\u003e\")\n\n    assert res.get_document_response is not None\n\n    # Handle response\n    print(res.get_document_response)"
+          },
+          {
+            "lang": "go",
+            "label": "getDocument",
+            "source": "package main\n\nimport(\n\t\"context\"\n\tfactifygo \"github.com/factify-inc/factify-go\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := factifygo.New(\n        factifygo.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Documents.Get(ctx, \"\u003cid\u003e\")\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.GetDocumentResponse != nil {\n        // handle response\n    }\n}"
+          },
+          {
+            "lang": "java",
+            "label": "getDocument",
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.operations.GetDocumentRequest;\nimport org.openapis.openapi.models.operations.GetDocumentResponse;\nimport org.openapis.openapi.models.sdkerrors.Error;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        GetDocumentRequest req = GetDocumentRequest.builder()\n                .documentId(\"\u003cid\u003e\")\n                .build();\n\n        GetDocumentResponse res = sdk.documents().get()\n                .request(req)\n                .call();\n\n        if (res.getDocumentResponse().isPresent()) {\n            // handle response\n        }\n    }\n}"
+          }
+        ]
       },
       "patch": {
         "description": "Update document title and description.",
@@ -1292,7 +1362,29 @@
         "tags": [
           "Documents"
         ],
-        "x-speakeasy-name-override": "update"
+        "x-speakeasy-name-override": "update",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "updateDocument",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.update({\n    documentId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "updateDocument",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.documents.update(document_id=\"\u003cid\u003e\")\n\n    assert res.update_document_response is not None\n\n    # Handle response\n    print(res.update_document_response)"
+          },
+          {
+            "lang": "go",
+            "label": "updateDocument",
+            "source": "package main\n\nimport(\n\t\"context\"\n\tfactifygo \"github.com/factify-inc/factify-go\"\n\t\"github.com/factify-inc/factify-go/models/operations\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := factifygo.New(\n        factifygo.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Documents.Update(ctx, \"\u003cid\u003e\", operations.UpdateDocumentUpdateDocumentRequest{})\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.UpdateDocumentResponse != nil {\n        // handle response\n    }\n}"
+          },
+          {
+            "lang": "java",
+            "label": "updateDocument",
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.operations.*;\nimport org.openapis.openapi.models.sdkerrors.Error;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        UpdateDocumentRequest req = UpdateDocumentRequest.builder()\n                .documentId(\"\u003cid\u003e\")\n                .body(UpdateDocumentUpdateDocumentRequest.builder()\n                    .build())\n                .build();\n\n        UpdateDocumentResponse res = sdk.documents().update()\n                .request(req)\n                .call();\n\n        if (res.updateDocumentResponse().isPresent()) {\n            // handle response\n        }\n    }\n}"
+          }
+        ]
       }
     },
     "/v1beta/documents/{document_id}/entry_page": {
@@ -1348,7 +1440,29 @@
           "Entry Pages"
         ],
         "x-speakeasy-group": "entryPages",
-        "x-speakeasy-name-override": "generate"
+        "x-speakeasy-name-override": "generate",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "generateDocumentEntryPage",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.entryPages.generate({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "generateDocumentEntryPage",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.entry_pages.generate(document_id=\"\u003cid\u003e\")\n\n    assert res.generate_entry_page_response is not None\n\n    # Handle response\n    print(res.generate_entry_page_response)"
+          },
+          {
+            "lang": "go",
+            "label": "generateDocumentEntryPage",
+            "source": "package main\n\nimport(\n\t\"context\"\n\tfactifygo \"github.com/factify-inc/factify-go\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := factifygo.New(\n        factifygo.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.EntryPages.Generate(ctx, \"\u003cid\u003e\")\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.GenerateEntryPageResponse != nil {\n        // handle response\n    }\n}"
+          },
+          {
+            "lang": "java",
+            "label": "generateDocumentEntryPage",
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.operations.GenerateDocumentEntryPageRequest;\nimport org.openapis.openapi.models.operations.GenerateDocumentEntryPageResponse;\nimport org.openapis.openapi.models.sdkerrors.Error;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        GenerateDocumentEntryPageRequest req = GenerateDocumentEntryPageRequest.builder()\n                .documentId(\"\u003cid\u003e\")\n                .build();\n\n        GenerateDocumentEntryPageResponse res = sdk.entryPages().generate()\n                .request(req)\n                .call();\n\n        if (res.generateEntryPageResponse().isPresent()) {\n            // handle response\n        }\n    }\n}"
+          }
+        ]
       }
     },
     "/v1beta/documents/{document_id}/policies": {
@@ -1369,27 +1483,27 @@
             }
           },
           {
-            "description": "Number of results to return (1-100). Default: 50.",
+            "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
             "in": "query",
-            "name": "limit",
+            "name": "page_token",
             "schema": {
-              "description": "Number of results to return (1-100). Default: 50.",
-              "example": 50,
-              "format": "int32",
-              "maximum": 100,
-              "minimum": 1,
-              "title": "limit",
-              "type": "integer"
+              "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+              "example": "eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0",
+              "title": "page_token",
+              "type": "string"
             }
           },
           {
-            "description": "Opaque pagination cursor from previous response.",
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
             "in": "query",
-            "name": "cursor",
+            "name": "page_size",
             "schema": {
-              "description": "Opaque pagination cursor from previous response.",
-              "title": "cursor",
-              "type": "string"
+              "description": "Maximum number of items to return per page (1-100). Default: 50.",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "page_size",
+              "type": "integer"
             }
           }
         ],
@@ -1427,20 +1541,42 @@
         "tags": [
           "Policies"
         ],
+        "x-speakeasy-name-override": "list",
         "x-speakeasy-pagination": {
+          "type": "cursor",
           "inputs": [
             {
+              "name": "page_token",
               "in": "parameters",
-              "name": "cursor",
               "type": "cursor"
             }
           ],
           "outputs": {
-            "nextCursor": "$.pagination.next_cursor"
-          },
-          "type": "cursor"
+            "nextCursor": "$.pagination.next_page_token"
+          }
         },
-        "x-speakeasy-name-override": "list"
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "listDocumentPolicies",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policies.list({\n    documentId: \"\u003cid\u003e\",\n    pageToken: \"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "listDocumentPolicies",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.policies.list(document_id=\"\u003cid\u003e\", page_token=\"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+          },
+          {
+            "lang": "go",
+            "label": "listDocumentPolicies",
+            "source": "package main\n\nimport(\n\t\"context\"\n\tfactifygo \"github.com/factify-inc/factify-go\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := factifygo.New(\n        factifygo.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Policies.List(ctx, \"\u003cid\u003e\", factifygo.Pointer(\"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\"), nil)\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.ListDocumentPoliciesResponse != nil {\n        for {\n            // handle items\n\n            res, err = res.Next()\n\n            if err != nil {\n                // handle error\n            }\n\n            if res == nil {\n                break\n            }\n        }\n    }\n}"
+          },
+          {
+            "lang": "java",
+            "label": "listDocumentPolicies",
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.operations.ListDocumentPoliciesRequest;\nimport org.openapis.openapi.models.operations.ListDocumentPoliciesResponse;\nimport org.openapis.openapi.models.sdkerrors.Error;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        ListDocumentPoliciesRequest req = ListDocumentPoliciesRequest.builder()\n                .documentId(\"\u003cid\u003e\")\n                .pageToken(\"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n                .build();\n\n\n        sdk.policies().list()\n                .callAsStream()\n                .forEach((ListDocumentPoliciesResponse item) -\u003e {\n                   // handle page\n                });\n\n    }\n}"
+          }
+        ]
       },
       "post": {
         "description": "Attach a policy to a document.",
@@ -1517,7 +1653,29 @@
         "tags": [
           "Policies"
         ],
-        "x-speakeasy-name-override": "attach"
+        "x-speakeasy-name-override": "attach",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "attachDocumentPolicy",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policies.attach({\n    documentId: \"\u003cid\u003e\",\n    body: {\n      policyId: \"\u003cid\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "attachDocumentPolicy",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.policies.attach(document_id=\"\u003cid\u003e\", policy_id=\"\u003cid\u003e\")\n\n    assert res.document_policy is not None\n\n    # Handle response\n    print(res.document_policy)"
+          },
+          {
+            "lang": "go",
+            "label": "attachDocumentPolicy",
+            "source": "package main\n\nimport(\n\t\"context\"\n\tfactifygo \"github.com/factify-inc/factify-go\"\n\t\"github.com/factify-inc/factify-go/models/operations\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := factifygo.New(\n        factifygo.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Policies.Attach(ctx, \"\u003cid\u003e\", operations.AttachPolicyRequest{\n        PolicyID: \"\u003cid\u003e\",\n    })\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.DocumentPolicy != nil {\n        // handle response\n    }\n}"
+          },
+          {
+            "lang": "java",
+            "label": "attachDocumentPolicy",
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.operations.*;\nimport org.openapis.openapi.models.sdkerrors.Error;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        AttachDocumentPolicyRequest req = AttachDocumentPolicyRequest.builder()\n                .documentId(\"\u003cid\u003e\")\n                .body(AttachPolicyRequest.builder()\n                    .policyId(\"\u003cid\u003e\")\n                    .build())\n                .build();\n\n        AttachDocumentPolicyResponse res = sdk.policies().attach()\n                .request(req)\n                .call();\n\n        if (res.documentPolicy().isPresent()) {\n            // handle response\n        }\n    }\n}"
+          }
+        ]
       }
     },
     "/v1beta/documents/{document_id}/policies/{policy_id}": {
@@ -1584,7 +1742,29 @@
         "tags": [
           "Policies"
         ],
-        "x-speakeasy-name-override": "detach"
+        "x-speakeasy-name-override": "detach",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "detachDocumentPolicy",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policies.detach({\n    documentId: \"\u003cid\u003e\",\n    policyId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "detachDocumentPolicy",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.policies.detach(document_id=\"\u003cid\u003e\", policy_id=\"\u003cid\u003e\")\n\n    assert res.empty is not None\n\n    # Handle response\n    print(res.empty)"
+          },
+          {
+            "lang": "go",
+            "label": "detachDocumentPolicy",
+            "source": "package main\n\nimport(\n\t\"context\"\n\tfactifygo \"github.com/factify-inc/factify-go\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := factifygo.New(\n        factifygo.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Policies.Detach(ctx, \"\u003cid\u003e\", \"\u003cid\u003e\")\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.Empty != nil {\n        // handle response\n    }\n}"
+          },
+          {
+            "lang": "java",
+            "label": "detachDocumentPolicy",
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.operations.DetachDocumentPolicyRequest;\nimport org.openapis.openapi.models.operations.DetachDocumentPolicyResponse;\nimport org.openapis.openapi.models.sdkerrors.Error;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        DetachDocumentPolicyRequest req = DetachDocumentPolicyRequest.builder()\n                .documentId(\"\u003cid\u003e\")\n                .policyId(\"\u003cid\u003e\")\n                .build();\n\n        DetachDocumentPolicyResponse res = sdk.policies().detach()\n                .request(req)\n                .call();\n\n        if (res.empty().isPresent()) {\n            // handle response\n        }\n    }\n}"
+          }
+        ]
       }
     },
     "/v1beta/documents/{document_id}/versions": {
@@ -1605,27 +1785,27 @@
             }
           },
           {
-            "description": "Number of results to return (1-100). Default: 50.",
+            "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
             "in": "query",
-            "name": "limit",
+            "name": "page_token",
             "schema": {
-              "description": "Number of results to return (1-100). Default: 50.",
-              "example": 50,
-              "format": "int32",
-              "maximum": 100,
-              "minimum": 1,
-              "title": "limit",
-              "type": "integer"
+              "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+              "example": "eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0",
+              "title": "page_token",
+              "type": "string"
             }
           },
           {
-            "description": "Opaque pagination cursor from previous response.",
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
             "in": "query",
-            "name": "cursor",
+            "name": "page_size",
             "schema": {
-              "description": "Opaque pagination cursor from previous response.",
-              "title": "cursor",
-              "type": "string"
+              "description": "Maximum number of items to return per page (1-100). Default: 50.",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "page_size",
+              "type": "integer"
             }
           }
         ],
@@ -1663,20 +1843,42 @@
         "tags": [
           "Versions"
         ],
+        "x-speakeasy-name-override": "list",
         "x-speakeasy-pagination": {
+          "type": "cursor",
           "inputs": [
             {
+              "name": "page_token",
               "in": "parameters",
-              "name": "cursor",
               "type": "cursor"
             }
           ],
           "outputs": {
-            "nextCursor": "$.pagination.next_cursor"
-          },
-          "type": "cursor"
+            "nextCursor": "$.pagination.next_page_token"
+          }
         },
-        "x-speakeasy-name-override": "list"
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "listDocumentVersions",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.list({\n    documentId: \"\u003cid\u003e\",\n    pageToken: \"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "listDocumentVersions",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.versions.list(document_id=\"\u003cid\u003e\", page_token=\"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+          },
+          {
+            "lang": "go",
+            "label": "listDocumentVersions",
+            "source": "package main\n\nimport(\n\t\"context\"\n\tfactifygo \"github.com/factify-inc/factify-go\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := factifygo.New(\n        factifygo.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Versions.List(ctx, \"\u003cid\u003e\", factifygo.Pointer(\"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\"), nil)\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.ListVersionsResponse != nil {\n        for {\n            // handle items\n\n            res, err = res.Next()\n\n            if err != nil {\n                // handle error\n            }\n\n            if res == nil {\n                break\n            }\n        }\n    }\n}"
+          },
+          {
+            "lang": "java",
+            "label": "listDocumentVersions",
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.operations.ListDocumentVersionsRequest;\nimport org.openapis.openapi.models.operations.ListDocumentVersionsResponse;\nimport org.openapis.openapi.models.sdkerrors.Error;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        ListDocumentVersionsRequest req = ListDocumentVersionsRequest.builder()\n                .documentId(\"\u003cid\u003e\")\n                .pageToken(\"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n                .build();\n\n\n        sdk.versions().list()\n                .callAsStream()\n                .forEach((ListDocumentVersionsResponse item) -\u003e {\n                   // handle page\n                });\n\n    }\n}"
+          }
+        ]
       },
       "post": {
         "description": "Creates a new version by uploading a PDF file.",
@@ -1739,7 +1941,29 @@
         "tags": [
           "Versions"
         ],
-        "x-speakeasy-name-override": "create"
+        "x-speakeasy-name-override": "create",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "createDocumentVersion",
+            "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.create({\n    documentId: \"\u003cid\u003e\",\n    body: {\n      payload: await openAsBlob(\"example.file\"),\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "createDocumentVersion",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.versions.create(document_id_param=\"\u003cvalue\u003e\", payload={\n        \"file_name\": \"example.file\",\n        \"content\": open(\"example.file\", \"rb\"),\n    })\n\n    assert res.version is not None\n\n    # Handle response\n    print(res.version)"
+          },
+          {
+            "lang": "go",
+            "label": "createDocumentVersion",
+            "source": "package main\n\nimport(\n\t\"context\"\n\tfactifygo \"github.com/factify-inc/factify-go\"\n\t\"os\"\n\t\"github.com/factify-inc/factify-go/models/components\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := factifygo.New(\n        factifygo.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    example, fileErr := os.Open(\"example.file\")\n    if fileErr != nil {\n        panic(fileErr)\n    }\n\n    res, err := s.Versions.Create(ctx, \"\u003cid\u003e\", components.CreateVersionRequest{\n        Payload: components.CreateVersionRequestPayload{\n            FileName: \"example.file\",\n            Content: example,\n        },\n    })\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.Version != nil {\n        // handle response\n    }\n}"
+          },
+          {
+            "lang": "java",
+            "label": "createDocumentVersion",
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport java.nio.file.Paths;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.components.CreateVersionRequest;\nimport org.openapis.openapi.models.components.CreateVersionRequestPayload;\nimport org.openapis.openapi.models.operations.CreateDocumentVersionRequest;\nimport org.openapis.openapi.models.operations.CreateDocumentVersionResponse;\nimport org.openapis.openapi.models.sdkerrors.Error;\nimport org.openapis.openapi.utils.Blob;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        CreateDocumentVersionRequest req = CreateDocumentVersionRequest.builder()\n                .documentId(\"\u003cid\u003e\")\n                .body(CreateVersionRequest.builder()\n                    .payload(CreateVersionRequestPayload.builder()\n                        .fileName(\"example.file\")\n                        .content(Blob.from(Paths.get(\"example.file\")))\n                        .build())\n                    .build())\n                .build();\n\n        CreateDocumentVersionResponse res = sdk.versions().create()\n                .request(req)\n                .call();\n\n    }\n}"
+          }
+        ]
       }
     },
     "/v1beta/documents/{document_id}/versions/{version_id}": {
@@ -1806,7 +2030,29 @@
         "tags": [
           "Versions"
         ],
-        "x-speakeasy-name-override": "get"
+        "x-speakeasy-name-override": "get",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "getDocumentVersion",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.get({\n    documentId: \"\u003cid\u003e\",\n    versionId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "getDocumentVersion",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.versions.get(document_id=\"\u003cid\u003e\", version_id=\"\u003cid\u003e\")\n\n    assert res.version is not None\n\n    # Handle response\n    print(res.version)"
+          },
+          {
+            "lang": "go",
+            "label": "getDocumentVersion",
+            "source": "package main\n\nimport(\n\t\"context\"\n\tfactifygo \"github.com/factify-inc/factify-go\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := factifygo.New(\n        factifygo.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Versions.Get(ctx, \"\u003cid\u003e\", \"\u003cid\u003e\")\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.Version != nil {\n        // handle response\n    }\n}"
+          },
+          {
+            "lang": "java",
+            "label": "getDocumentVersion",
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.operations.GetDocumentVersionRequest;\nimport org.openapis.openapi.models.operations.GetDocumentVersionResponse;\nimport org.openapis.openapi.models.sdkerrors.Error;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        GetDocumentVersionRequest req = GetDocumentVersionRequest.builder()\n                .documentId(\"\u003cid\u003e\")\n                .versionId(\"\u003cid\u003e\")\n                .build();\n\n        GetDocumentVersionResponse res = sdk.versions().get()\n                .request(req)\n                .call();\n\n        if (res.version().isPresent()) {\n            // handle response\n        }\n    }\n}"
+          }
+        ]
       },
       "patch": {
         "description": "Update version title and description.",
@@ -1899,7 +2145,29 @@
         "tags": [
           "Versions"
         ],
-        "x-speakeasy-name-override": "update"
+        "x-speakeasy-name-override": "update",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "updateDocumentVersion",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.update({\n    documentId: \"\u003cid\u003e\",\n    versionId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "updateDocumentVersion",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.versions.update(document_id=\"\u003cid\u003e\", version_id=\"\u003cid\u003e\")\n\n    assert res.version is not None\n\n    # Handle response\n    print(res.version)"
+          },
+          {
+            "lang": "go",
+            "label": "updateDocumentVersion",
+            "source": "package main\n\nimport(\n\t\"context\"\n\tfactifygo \"github.com/factify-inc/factify-go\"\n\t\"github.com/factify-inc/factify-go/models/operations\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := factifygo.New(\n        factifygo.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Versions.Update(ctx, \"\u003cid\u003e\", \"\u003cid\u003e\", operations.UpdateVersionRequest{})\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.Version != nil {\n        // handle response\n    }\n}"
+          },
+          {
+            "lang": "java",
+            "label": "updateDocumentVersion",
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.operations.*;\nimport org.openapis.openapi.models.sdkerrors.Error;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        UpdateDocumentVersionRequest req = UpdateDocumentVersionRequest.builder()\n                .documentId(\"\u003cid\u003e\")\n                .versionId(\"\u003cid\u003e\")\n                .body(UpdateVersionRequest.builder()\n                    .build())\n                .build();\n\n        UpdateDocumentVersionResponse res = sdk.versions().update()\n                .request(req)\n                .call();\n\n        if (res.version().isPresent()) {\n            // handle response\n        }\n    }\n}"
+          }
+        ]
       }
     }
   },
